@@ -4,29 +4,29 @@ package main
 
 import (
 	"fmt"
-	. "github.com/jayteesf/person"
+	"github.com/jayteesf/person"
 )
 
 func main() {
-	var person = &Person{Name: "JayTeeSF", Email: "jaytee@jayteesf.com"}
-	var other_person = &Person{Name: "JayTeeSFOther", Email: "jaytee+other@jayteesf.com"}
-	other_person.Save()
-	other_person_json, err := other_person.AsJson()
+	var p1 = &person.Person{Name: "JayTeeSF", Email: "jaytee@jayteesf.com"}
+	var p2 = &person.Person{Name: "JayTeeSFOther", Email: "jaytee+other@jayteesf.com"}
+	p2.Save()
+	p2_json, err := p2.AsJson()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("saved person: ", string(other_person_json))
-	person.Save()
-	person_json, err := person.AsJson()
+	fmt.Println("saved person: ", string(p2_json))
+	p1.Save()
+	p1_json, err := p1.AsJson()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("saved person: ", string(person_json))
-	loaded_person, err := LoadPerson(person.Email)
+	fmt.Println("saved person: ", string(p1_json))
+	reloaded_p1, err := person.LoadPerson(p1.Email)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("got person: %+v\n", loaded_person)
+	fmt.Printf("got person: %+v\n", reloaded_p1)
 
 	fmt.Println("done")
 }
